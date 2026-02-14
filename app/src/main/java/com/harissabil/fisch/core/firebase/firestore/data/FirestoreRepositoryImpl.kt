@@ -4,6 +4,37 @@ import android.graphics.Bitmap
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.CollectionReference
 import com.google.firebase.firestore.GeoPoint
+<<<<<<< HEAD
+=======
+import com.harissabil.fisch.core.common.util.Resource
+import com.harissabil.fisch.core.firebase.firestore.data.dto.LogbookResponse
+import com.harissabil.fisch.core.firebase.firestore.data.dto.MapResponse
+import com.harissabil.fisch.core.firebase.firestore.domain.FirestoreRepository
+import com.harissabil.fisch.core.firebase.firestore.domain.model.Constant.EMAIL
+import com.harissabil.fisch.core.firebase.firestore.domain.model.Constant.LOGBOOKS
+import com.harissabil.fisch.core.firebase.firestore.domain.model.Constant.MAPS
+import com.harissabil.fisch.core.firebase.firestore.domain.model.Logbook
+import com.harissabil.fisch.core.firebase.firestore.domain.model.Map
+import com.harissabil.fisch.core.firebase.storage.domain.StorageRepository
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.tasks.await
+import timber.log.Timber
+import java.io.ByteArrayOutputStream
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Singleton
+
+@Singleton
+class FirestoreRepositoryImpl @Inject constructor(
+    @Named(LOGBOOKS) private val logbooksRef: CollectionReference,
+    @Named(MAPS) private val mapsRef: CollectionReference,
+    private val auth: FirebaseAuth,
+    private val storageRepository: StorageRepository,
+) : FirestoreRepository {
+
+>>>>>>> fcbe66e (Release)
     override fun getLogbooks(): Flow<Resource<List<LogbookResponse>>> = callbackFlow {
         val logbookListener = logbooksRef.orderBy(LOGBOOKS).addSnapshotListener { snapshot, e ->
             val logbooksResponse = if (snapshot != null) {
